@@ -5,7 +5,7 @@
 
 		.DATA
 
-charsum 	DW 		(?)
+; charsum 	DW 		(?)
 
 		.CODE
 
@@ -45,18 +45,19 @@ findChar PROC
 		int 	3h
 		push 	BP
 		mov 	BP, SP
+		sub 	SP, 2
 
 		mov 	si, [BP+6]
 		mov 	bh, [si]
 
 		mov 	si, [BP+4]
 		mov 	ch, [si]
-		xor 	ax, ax
+		mov 	byte ptr [bp-2], 0
 findLoop:
 
 		cmp 	ch, bh
 		jne 	notEqual
-		inc 	charsum
+		inc 	byte ptr[BP-2]
 notEqual:
 		inc 	si
 		mov 	ch, [si]
@@ -66,7 +67,9 @@ notEqual:
 
 koniec:
 
-		mov 	ax, charsum
+		xor 	ah, ah
+		mov 	al, byte ptr [bp-2]
+		add 	SP, 2
 		pop 	BP
 		ret
 		ENDP

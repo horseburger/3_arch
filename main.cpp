@@ -10,10 +10,12 @@ char* rn = "\n\r$";
 
 
 void main(){
-
-	int n = 3;
-	float array[3];
+	cout << "Podaj wielkosc tablicy: ";
+	int n;
+	cin >> n;
+	float *array = new float [n];
 	for(int i=0;i<n;i++){
+		cout << "Wartosc " << i+1 << " : ";
 		cin >> array[i];
 	}
 	float avg = arrayAvg(array, n);
